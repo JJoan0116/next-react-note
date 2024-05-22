@@ -1,5 +1,6 @@
 import React from 'react'
 import dayjs from 'dayjs'
+import SidebarNoteItem from '../SidebarNoteItem'
 
 const SidebarNoteList = async ({ notes }) => {
   const arr = await Object.entries(notes)
@@ -14,10 +15,7 @@ const SidebarNoteList = async ({ notes }) => {
         const { title, updateTime } = JSON.parse(note)
         return (
           <li key={noteId}>
-            <header className="sidebar-note-header">
-              <strong>{title}</strong>
-              <small>{dayjs(updateTime).format('YYYY-MM-DD hh:mm:ss')}</small>
-            </header>
+            <SidebarNoteItem noteId={noteId} note={JSON.parse(note)} />
           </li>
         )
       })}
