@@ -1,26 +1,12 @@
-import React from 'react'
-import dayjs from 'dayjs'
-import SidebarNoteItem from '../SidebarNoteItem'
+import SidebarNoteListFilter from '@/components/SidebarNoteListFilter'
+import { getAllNotes } from '@/lib/redis'
 
-const SidebarNoteList = async ({ notes }) => {
-  const arr = await Object.entries(notes)
+export default async function NoteList() {
+  const notes = await getAllNotes()
 
-  if (arr.length === 0) {
+  if (Object.entries(notes).length == 0) {
     return <div className="notes-empty">{'No notes created yet!'}</div>
   }
 
-  return (
-    <ul className="notes-list">
-      {arr.map(([noteId, note]) => {
-        const { title, updateTime } = JSON.parse(note)
-        return (
-          <li key={noteId}>
-            <SidebarNoteItem noteId={noteId} note={JSON.parse(note)} />
-          </li>
-        )
-      })}
-    </ul>
-  )
+  return <SidebarNoteListFilter notes={notes} />
 }
-
-export default SidebarNoteList
