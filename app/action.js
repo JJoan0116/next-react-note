@@ -1,10 +1,11 @@
 'use server'
 
 import { redirect } from 'next/navigation'
-import { addNote, updateNote, delNote } from '@/lib/redis'
+import { addNote, updateNote, delNote } from '@/lib/strapi'
 import { revalidatePath } from 'next/cache'
 
 export async function saveNote(noteId, title, body) {
+  console.log(111111, noteId, title, body)
   const data = JSON.stringify({
     title,
     content: body,

@@ -1,10 +1,11 @@
 import React, { Suspense } from 'react'
 import Link from 'next/link'
-import { getAllNotes } from '@/lib/redis'
+import { getAllNotes } from '@/lib/strapi'
 import SidebarNoteList from '../SidebarNoteList'
 import EditButton from '@/components/EditButton'
 import NoteListSkeleton from '@/components/NoteListSkeleton'
 import SidebarSearchField from '@/components/SidebarSearchField'
+import SidebarImport from '../SidebarImport'
 
 const Sidebar = async () => {
   const notes = await getAllNotes()
@@ -34,6 +35,7 @@ const Sidebar = async () => {
             <SidebarNoteList notes={notes} />
           </Suspense>
         </nav>
+        <SidebarImport />
       </section>
     </>
   )
